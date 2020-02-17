@@ -387,10 +387,14 @@
 -- @return
 --    The prepared path.
 ---
-
 	function vstudio.path(cfg, value)
-		cfg = cfg.project or cfg
-		local dirs = path.translate(project.getrelative(cfg, value))
+		-- Keep paths absolute.  Visual studio has issues resolving relative paths sometimes, and it
+		-- really doesn't matter if a path is absolute or relative in terms of portability since the
+		-- premake script should be run on each workstation for each fresh install of the project
+		-- anyways.
+		--cfg = cfg.project or cfg
+		--local dirs = path.translate(project.getrelative(cfg, value))
+		local dirs = value
 
 		if type(dirs) == 'table' then
 			dirs = table.filterempty(dirs)
