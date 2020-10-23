@@ -1,0 +1,1 @@
+.\bin\release\premake5 vs2019
